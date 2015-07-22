@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Drawing;
 
 namespace The_Quest
 {
@@ -33,6 +34,31 @@ namespace The_Quest
             }
         }
 
-        public Point Move(Direction direction)
+        public Point Move(Direction direction, Rect boundaries)
+        {
+            Point newLocation = location;
+            switch (direction)
+            {
+                case Direction.Up:
+                    if (newLocation.Y - MoveInterval >= boundaries.Top)
+                        newLocation.Y -= MoveInterval;
+                    break;
+                case Direction.Down:
+                    if (newLocation.Y - MoveInterval >= boundaries.Bottom)
+                        newLocation.Y += MoveInterval;
+                    break;
+                case Direction.Left:
+                    if (newLocation.X - MoveInterval >= boundaries.Left)
+                        newLocation.X -= MoveInterval;
+                    break;
+                case Direction.Right:
+                    if (newLocation.X - MoveInterval >= boundaries.Right)
+                        newLocation.X += MoveInterval;
+                    break;
+                default:
+                    break;
+            }
+            return newLocation;
+        }
     }
 }

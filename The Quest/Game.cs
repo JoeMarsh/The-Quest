@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using System.Windows.Shapes;
 using System.Windows;
 
 namespace The_Quest
@@ -20,10 +19,10 @@ namespace The_Quest
         public IEnumerable<string> PlayerWeapons { get { return player.Weapons; } }
         private int level = 0;
 
-        public Rectangle boundaries;
-        public Rectangle Boundaries { get { return boundaries; } }
+        public Rect boundaries;
+        public Rect Boundaries { get { return boundaries; } }
 
-        public Game(Rectangle boundaries)
+        public Game(Rect boundaries)
         {
             this.boundaries = boundaries;
             player = new player(this, new Point(boundaries.Left + 10, boundaries.Top + 70));
@@ -67,9 +66,9 @@ namespace The_Quest
         private Point GetRandomLocation(Random random)
         {
             return new Point(boundaries.Left +
-                random.Next(boundaries.Right / 10 - boundaries.Left / 10) * 10,
+                random.Next(Convert.ToInt32(boundaries.Right / 10 - boundaries.Left / 10)) * 10,
                 boundaries.Top +
-                random.Next(boundaries.Bottom / 10 - boundaries.Top / 10) * 10); 
+                random.Next(Convert.ToInt32(boundaries.Bottom / 10 - boundaries.Top / 10)) * 10); 
         }
 
         public void NewLevel(Random random)
